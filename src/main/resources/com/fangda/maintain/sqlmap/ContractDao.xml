@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fangda.maintain.web.dao.ContractDao">
+  
+	<select id="queryListByParam" parameterType="Map" resultMap="com.fangda.maintain.web.dao.mapper.ContractMapper.BaseResultMap">
+
+		select
+		<include refid="com.fangda.maintain.web.dao.mapper.ContractMapper.Base_Column_List" />
+		from fd_contract where (is_deleted = 0 or is_deleted is null)
+		<if test="idList != null and idList.size != 0">
+		and	project_id in
+				<foreach collection="idList" item="item" index="index"  open="(" separator="," close=")">
+		            #{item}
+		        </foreach>
+		</if>
+    	<if test="dateStart != null"> <![CDATA[ and DATE_FORMAT(DATE_START,'%Y-%m-%d') >= #{dateStart,jdbcType=TIMESTAMP} ]]></if>
+    	<if test="dateStart != null"> <![CDATA[ and DATE_FORMAT(DATE_END,'%Y-%m-%d') >= #{dateStart,jdbcType=TIMESTAMP} ]]></if>
+    	<if test="dateEnd != null"> <![CDATA[ and DATE_FORMAT(DATE_END,'%Y-%m-%d') <= #{dateEnd,jdbcType=TIMESTAMP} ]]></if>
+    	<if test="dateEnd != null"> <![CDATA[ and DATE_FORMAT(DATE_START,'%Y-%m-%d') <= #{dateEnd,jdbcType=TIMESTAMP} ]]></if>
+    	<if test="status != null and status !=''"> and status = #{status,jdbcType=VARCHAR}</if>
+    	<if test="contractType != null and contractType !=''"> and CONTRACT_TYPE = #{contractType,jdbcType=VARCHAR}</if>
+    	<if test="contractNo != null and contractNo !=''"> and UPPER(CONTRACT_NO) like CONCAT('%',UPPER(#{contractNo}),'%') </if>
+    	<if test="projectId != null and projectId !=''"> and PROJECT_ID = #{projectId,jdbcType=VARCHAR}</if>
+    	and status != 5
+    	order by date_created desc
+    	limit ${start},${pageSize}
+	</select>
+
+	<select id="countByParam" parameterType="Map" resultType="int">
+		select
+		count(1)
+		from fd_contract where (is_deleted = 0 or is_deleted is null)
+		<if test="idList != null and idList.size != 0">
+		and	project_id in
+				<foreach collection="idList" item="item" index="index"  open="(" separator="," close=")">
+		            #{item}
+		        </foreach>
+		</if>
+    	<if test="dateStart != null"> <![CDATA[ and DATE_FORMAT(DATE_START,'%Y-%m-%d') >= #{dateStart,jdbcType=TIMESTAMP} ]]></if>
+    	<if test="dateStart != null"> <![CDATA[ and DATE_FORMAT(DATE_END,'%Y-%m-%d') >= #{dateStart,jdbcType=TIMESTAMP} ]]></if>
+    	<if test="dateEnd != null"> <![CDATA[ and DATE_FORMAT(DATE_END,'%Y-%m-%d') <= #{dateEnd,jdbcType=TIMESTAMP} ]]></if>
+    	<if test="dateEnd != null"> <![CDATA[ and DATE_FORMAT(DATE_START,'%Y-%m-%d') <= #{dateEnd,jdbcType=TIMESTAMP} ]]></if>
+    	<if test="status != null and status !=''"> and status = #{status,jdbcType=VARCHAR}</if>
+    	<if test="contractType != null and contractType !=''"> and CONTRACT_TYPE = #{contractType,jdbcType=VARCHAR}</if>
+    	<if test="contractNo != null and contractNo !=''"> and UPPER(CONTRACT_NO) like CONCAT('%',UPPER(#{contractNo}),'%') </if>
+    	<if test="projectId != null and projectId !=''"> and PROJECT_ID = #{projectId,jdbcType=VARCHAR}</if>
+	</select>
+
+	<select id="getContractByNO" parameterType="java.lang.String" resultMap="com.fangda.maintain.web.dao.mapper.ContractMapper.BaseResultMap">
+		select
+		<include refid="com.fangda.maintain.web.dao.mapper.ContractMapper.Base_Column_List" />
+		from fd_contract where
+		contract_no = #{contractNO,jdbcType=VARCHAR}
+    	limit 0,1
+	</select>
+
+    <update id="updateStatus" >
+	    update fd_contract
+	    <set>
+	        Status = #{1},
+	        AUDIT_COMMENT = #{2},
+	        AUDIT_BY = #{3},
+	        DATE_AUDIT = #{4}
+	    </set>
+	    where ID = #{0}
+  </update>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fangda.maintain.web.dao.ContractDao">
+  
+	<select id="queryListByParam" parameterType="Map" resultMap="com.fangda.maintain.web.dao.mapper.MaintainTypeMapper.BaseResultMap">
+		select
+		<include refid="com.fangda.maintain.web.dao.mapper.ContractMapper.Base_Column_List" />
+		from fd_mantain_info where (1 = 1)
+		<if test="projectid != null"> and PROJECT_ID = #{projectid,jdbcType=BIGINT}</if>
+		<if test="maintainId != null"> and maintain_id = #{projectid,jdbcType=BIGINT}</if>
+		<if test="pictureUrl != null"> and picture_url = #{pictureUrl,jdbcType=VARCHAR}</if>
+		<if test="desc != null"> and desc = #{desc,jdbcType=VARCHAR}</if>
+		order by update_time desc
+	</select>
+
+	<select id="countByParam" parameterType="Map" resultType="int">
+		select
+		count(1)
+		from fd_mantain_info where (1 = 1)
+		<if test="projectid != null"> and PROJECT_ID = #{projectid,jdbcType=BIGINT}</if>
+		<if test="maintainId != null"> and maintain_id = #{projectid,jdbcType=BIGINT}</if>
+		<if test="pictureUrl != null"> and picture_url = #{pictureUrl,jdbcType=VARCHAR}</if>
+		<if test="desc != null"> and desc = #{desc,jdbcType=VARCHAR}</if>
+	</select>
+
+	<delete id="deleteByProject" parameterType="com.fangda.maintain.web.model.BillstoreRelKey">
+		delete from fd_mantain_info
+		where projectId = #{projectId,jdbcType=BIGINT}
+		and maintain_id = #{maintainId,jdbcType=BIGINT}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+
+<!--     <classPathEntry location="C:\Users\IBM_ADMIN\.m2\repository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
+ -->
+    <classPathEntry location="D:\repo\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
+
+    <context id="context1" >
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <!-- Example改名 -->
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$" />
+            <property name="replaceString" value="Criteria" />
+        </plugin>
+
+        <commentGenerator>
+            <property name="javaFileEncoding" value="UTF-8"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false" />
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/fangda?autoCommit=true&amp;useUnicode=true&amp;autoReconnect=true" userId="root" password="root" />
+        <!-- entity.java -->
+        <javaModelGenerator targetPackage="com.fangda.maintain.web.model" targetProject="fangda-maintain/src/main/java" />
+        <!-- mapper.xml -->
+        <sqlMapGenerator targetPackage="mybatis.autodao" targetProject="fangda-maintain/src/main/resources" />
+        <!-- mapper.java -->
+        <javaClientGenerator targetPackage="com.fangda.maintain.web.mapper" targetProject="fangda-maintain/src/main/java" type="XMLMAPPER" />
+        
+        <!--<table  tableName="mc_contractrz" domainObjectName="ContractRZ" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<generatedKey identity="true" type="post" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+       	</table>-->
+        <!--
+        <table  tableName="mc_prepayment_purchase" domainObjectName="PrePaymentPurchase" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey identity="true" type="post" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+        
+        <table  tableName="mc_prepayment_purchase_rel" domainObjectName="PrePaymentPurchaseRel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey identity="true" type="post" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+		<table  tableName="mc_points_limits_rule" domainObjectName="PointsLimitsRule" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey identity="true" type="post" column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table> 
+		<table  tableName="mc_points_manual" domainObjectName="PointsManual" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+        <table  tableName="mc_store" domainObjectName="Store" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+        <table  tableName="mc_param" domainObjectName="Param" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+        <table  tableName="mc_document" domainObjectName="Document" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+		<table  tableName="mc_contract" domainObjectName="Contract" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+        <table  tableName="mc_merchant_info" domainObjectName="MerchantInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+       	<table  tableName="mc_merchant" domainObjectName="Merchant" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+        <table  tableName="mc_payeestore_rel" domainObjectName="PayeestoreRel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        
+        <table  tableName="mc_billstore_rel" domainObjectName="BillstoreRel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        <table  tableName="mc_bill_info" domainObjectName="BillInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+        
+        <table  tableName="mc_contract" domainObjectName="Contract" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+        <table  tableName="mc_bill_info" domainObjectName="BillInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+        <table  tableName="mc_payee_info" domainObjectName="PayeeInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+        
+		
+		<table  tableName="mc_contract" domainObjectName="Contract" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+		
+		<table  tableName="mc_goods_category" domainObjectName="GoodsCategory" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+
+        
+		<table  tableName="mc_contract" domainObjectName="Contract" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+       <table  tableName="mc_application" domainObjectName="Application" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+        <table  tableName="mc_Integration_sys" domainObjectName="IntegrationSys" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+		<table  tableName="mc_audit_log" domainObjectName="AuditLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()"/>
+        </table>
+		<table  tableName="mc_merchant_info" domainObjectName="MerchantInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+        
+		<table  tableName="mc_document" domainObjectName="Document" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+		<table  tableName="mc_area_info" domainObjectName="AreaInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+        <table  tableName="mc_point_policy" domainObjectName="PointPolicy" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+        <table  tableName="mc_point_config" domainObjectName="PointConfig" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+       
+        
+        
+        
+        <table  tableName="mc_organization" domainObjectName="Organization" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+        
+        
+        
+        <table  tableName="mc_application" domainObjectName="Application" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+        
+        <table  tableName="mc_audit_log" domainObjectName="AuditLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+        
+        <table  tableName="mc_contract" domainObjectName="Contract" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+        
+        <table  tableName="mc_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+        
+        <table  tableName="mc_usermerchant_rel" domainObjectName="UsermerchantRel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+        
+        <table  tableName="mc_options" domainObjectName="Options" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            
+        </table>
+         -->
+        
+    </context>
+</generatorConfiguration>

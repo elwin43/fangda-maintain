@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+	</settings>
+	<typeAliases> 
+		<!-- dto
+		<typeAlias type="com.hrt.promotion.model.Coupon" alias="coupon" />-->
+		<typeAlias type="com.fangda.maintain.web.model.Company" alias="company" />
+		<typeAlias type="com.fangda.maintain.web.model.Contract" alias="contract"/>
+	</typeAliases>
+	<mappers>
+		<!--<mapper resource="com/hrt/promotion/sqlmap/CampEventHistoryMapper.xml"/>-->
+		<mapper resource="com/fangda/maintain/sqlmap/CompanyMapper.xml"/>
+		<mapper resource="com/fangda/maintain/sqlmap/MccUserMapper.xml" />
+		<mapper resource="com/fangda/maintain/sqlmap/MccUserDao.xml" />
+		<mapper resource="com/fangda/maintain/sqlmap/ContractMapper.xml"/>
+		<mapper resource="com/fangda/maintain/sqlmap/ContractDao.xml"/>
+		<mapper resource="com/fangda/maintain/sqlmap/ProjectMapper.xml"/>
+		<mapper resource="com/fangda/maintain/sqlmap/ProjectDao.xml"/>
+	</mappers>
+</configuration>

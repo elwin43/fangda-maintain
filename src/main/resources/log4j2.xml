@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status="OFF"，可以去掉，它的含义为是否记录log4j2本身的event信息，默认是OFF -->
+<configuration status="OFF" monitorInterval="600">
+	<Properties>;
+		<!-- 日志输出格式 -->
+		<property name="log_pattern">%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %5level %c -%5level|%d{yyyy-MM-dd HH:mm:ss:SSS}|%X{MDC_TID}|%X{MDC_API_CODE}|%X{MDC_API_VERSION}|%X{MDC_ENCODE_METHOD}|%X{MDC_RETURN_FORMAT}|%X{MDC_FROM}|%X{MDC_API_APPNAME}|%X{MDC_COST}|%X{MDC_RETURN_RESULT}|%X{MDC_REMARK} %m%n		</property>
+		<!-- 日志文件存放路径 -->
+		<property name="file_url">/app/fangda/logs/maintain-api-</property>
+		<!-- 日志文件最小切割单位 -->
+		<property name="every_file_size">100M</property>
+		<!--<property name="flume_ip">10.0.53.14</property>
+		<property name="flume_port">9001</property>-->
+	</Properties>
+	<appenders>
+		<!-- 控制台输出 -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${log_pattern}" />
+		</Console>
+		<!-- debug File Config -->
+		<RollingRandomAccessFile   name="debugLog"
+								   filePattern="${file_url}debug-%d{yyyy-MM-dd-HH}-%i.log.gz" fileName="${file_url}debug.log"  immediateFlush="false">
+			<PatternLayout pattern="${log_pattern}" />
+			<SizeBaseDTriggeringPolicy size="${every_file_size}" />
+		</RollingRandomAccessFile>
+
+		<!-- info File Config -->
+		<RollingRandomAccessFile   name="infoLog"
+								   filePattern="${file_url}info-%d{yyyy-MM-dd-HH}-%i.log.gz" fileName="${file_url}info.log"  immediateFlush="false">
+			<PatternLayout pattern="${log_pattern}" />
+			<SizeBaseDTriggeringPolicy size="${every_file_size}" />
+		</RollingRandomAccessFile>
+		<!-- error File Config -->
+		<RollingRandomAccessFile   name="errorLog"
+								   filePattern="${file_url}error-%d{yyyy-MM-dd-HH}-%i.log.gz" fileName="${file_url}error.log"  immediateFlush="false">
+			<PatternLayout pattern="${log_pattern}" />
+			<SizeBaseDTriggeringPolicy size="${every_file_size}" />
+			<Filters>
+				<!-- 只显示debug信息 -->
+				<ThresholdFilter onMismatch="DENY" onMatch="ACCEPT" level="ERROR" />
+			</Filters>
+		</RollingRandomAccessFile >
+		<!--<Flume name="flumeLog" ignoreExceptions="false" mdcPrefix="ReqCtx_" compress="false">
+			<Agent host="${flume_ip}" port="${flume_port}" />
+			<RFC5424Layout enterpriseNumber="12293" includeMDC="true" mdcId="RequestContext" appName="GL" />
+		</Flume>-->
+	</appenders>
+	<loggers>
+		<AsyncLogger  name="com.fangda.maintain" level="INFO" />
+		<AsyncLogger name="org.apache.ibatis.jdbc" level="ERROR" />
+		<AsyncLogger name="org.springframework" level="DEBUG" />
+		<AsyncLogger name="org.dozer" level="ERROR" />
+		<asyncRoot level="debug">
+			<appender-ref level="DEBUG" ref="debugLog"/>
+            <appender-ref level="INFO" ref="infoLog"/>
+            <appender-ref level="ERROR" ref="errorLog"/>
+		</asyncRoot>
+	</loggers>
+</configuration>

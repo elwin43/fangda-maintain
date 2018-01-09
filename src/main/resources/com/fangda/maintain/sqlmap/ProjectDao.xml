@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fangda.maintain.web.dao.ProjectDao">
+  
+	<select id="queryListByParam" parameterType="Map" resultMap="com.fangda.maintain.web.dao.mapper.ProjectMapper.BaseResultMap">
+		
+		select
+		<include refid="com.fangda.maintain.web.dao.mapper.ProjectMapper.Base_Column_List" />
+		from fd_project where (is_deleted = 0 or is_deleted is null) 
+		<if test="idList != null and idList.size != 0">
+		and	project_id in 
+				<foreach collection="idList" item="item" index="index"  open="(" separator="," close=")">  
+		            #{item}  
+		        </foreach> 
+		</if> 
+  		<if test="maintainType != null and maintainType !=''"> and maintain_type = #{maintainType,jdbcType=VARCHAR}</if>
+    	<if test="location != null and location !=''"> and location = #{location,jdbcType=VARCHAR}</if>
+    	<if test="createUser != null and createUser !=''"> and create_user = #{createUser,jdbcType=VARCHAR}</if>
+    	order by date_created desc
+    	limit ${start},${pageSize}
+	</select>
+	
+	<select id="countByParam" parameterType="Map" resultType="int">
+		select
+		count(1)
+		from fd_project where (is_deleted = 0 or is_deleted is null)
+		<if test="idList != null and idList.size != 0">
+		and	project_id in 
+				<foreach collection="idList" item="item" index="index"  open="(" separator="," close=")">  
+		            #{item}  
+		        </foreach> 
+		</if>
+		<if test="maintainType != null and maintainType !=''"> and maintain_type = #{maintainType,jdbcType=VARCHAR}</if>
+		<if test="location != null and location !=''"> and location = #{location,jdbcType=VARCHAR}</if>
+		<if test="createUser != null and createUser !=''"> and create_user = #{createUser,jdbcType=VARCHAR}</if>
+	</select>
+	
+</mapper>
