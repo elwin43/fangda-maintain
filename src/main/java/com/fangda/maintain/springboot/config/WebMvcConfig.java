@@ -101,7 +101,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Bean
     MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setLocation("/app/fangda/uploadfile");
+        factory.setLocation("D:/app/fangda/uploadfile");
         return factory.createMultipartConfig();
     }
 }

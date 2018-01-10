@@ -2,6 +2,7 @@ package com.fangda.maintain.web.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class ProjectInputDTO extends BaseInputDTO implements Serializable {
 
@@ -9,7 +10,7 @@ public class ProjectInputDTO extends BaseInputDTO implements Serializable {
 
     private String name;
 
-    private String maintainType;
+    private List<MaintainInfoInputDTO> maintainInfos;
 
     private String location;
 
@@ -35,12 +36,12 @@ public class ProjectInputDTO extends BaseInputDTO implements Serializable {
         this.name = name;
     }
 
-    public String getMaintainType() {
-        return maintainType;
+    public List<MaintainInfoInputDTO> getMaintainInfos() {
+        return maintainInfos;
     }
 
-    public void setMaintainType(String maintainType) {
-        this.maintainType = maintainType;
+    public void setMaintainInfos(List<MaintainInfoInputDTO> maintainInfos) {
+        this.maintainInfos = maintainInfos;
     }
 
     public String getLocation() {
@@ -67,36 +68,4 @@ public class ProjectInputDTO extends BaseInputDTO implements Serializable {
         this.createUser = createUser;
     }
 
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        ProjectInputDTO other = (ProjectInputDTO) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getMaintainType() == null ? other.getMaintainType() == null : this.getMaintainType().equals(other.getMaintainType()))
-            && (this.getLocation() == null ? other.getLocation() == null : this.getLocation().equals(other.getLocation()))
-            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-            && (this.getCreateUser() == null ? other.getCreateUser() == null : this.getCreateUser().equals(other.getCreateUser()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getMaintainType() == null) ? 0 : getMaintainType().hashCode());
-        result = prime * result + ((getLocation() == null) ? 0 : getLocation().hashCode());
-        result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
-        result = prime * result + ((getCreateUser() == null) ? 0 : getCreateUser().hashCode());
-        return result;
-    }
 }
